@@ -6,6 +6,7 @@ use App\Enums\FuelType;
 use App\Enums\Transmission;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Car extends Model
@@ -32,6 +33,16 @@ class Car extends Model
     public function translations(): HasMany
     {
         return $this->hasMany(CarTranslation::class);
+    }
+
+    public function features(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Feature::class,
+            'car_feature',
+            'car_id',
+            'feature_id'
+        );
     }
 
     /**

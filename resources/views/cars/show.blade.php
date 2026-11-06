@@ -12,6 +12,17 @@
     <p><strong>Коробка передач:</strong> {{ $car->transmission->value }}</p>
     <p><strong>Колір:</strong> {{ $car->color ?? '—' }}</p>
 
+    <div class="mb-3">
+        <strong>Опції:</strong>
+        <div class="d-flex flex-wrap gap-2 mt-1">
+            @forelse ($car->features as $feature)
+                <span class="badge bg-secondary">{{ $feature->name }}</span>
+            @empty
+                <span class="text-muted">Опцій немає.</span>
+            @endforelse
+        </div>
+    </div>
+
     <div class="card mt-4">
         <div class="card-body">
             <h2 class="h4">{{ $car->title }}</h2>

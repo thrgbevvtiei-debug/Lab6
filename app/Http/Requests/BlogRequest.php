@@ -18,6 +18,8 @@ class BlogRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:500'],
             'text'        => ['nullable', 'string'],
             'category_id' => ['nullable', 'exists:category,category_id'],
+            'filters'     => ['sometimes', 'array'],
+            'filters.*'   => ['integer', 'distinct', 'exists:filter,filter_id'],
         ];
     }
 
@@ -28,6 +30,8 @@ class BlogRequest extends FormRequest
             'title.max'          => 'Заголовок не може бути довшим за 200 символів.',
             'description.max'    => 'Опис не може бути довшим за 500 символів.',
             'category_id.exists' => 'Обрана категорія не існує.',
+            'filters.*.exists'   => 'Обрана мітка не існує.',
+            'filters.*.distinct' => 'Мітки не повинні повторюватись.',
         ];
     }
 }

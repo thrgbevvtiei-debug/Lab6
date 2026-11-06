@@ -25,6 +25,16 @@ class CarRequest extends FormRequest
             'fuel_type'    => ['required', Rule::enum(FuelType::class)],
             'transmission' => ['required', Rule::enum(Transmission::class)],
             'color'        => ['nullable', 'string', 'max:30'],
+            'features'     => ['sometimes', 'array'],
+            'features.*'   => ['integer', 'distinct', 'exists:features,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'features.*.exists'   => 'Обрана опція не існує.',
+            'features.*.distinct' => 'Опції не повинні повторюватись.',
         ];
     }
 }
