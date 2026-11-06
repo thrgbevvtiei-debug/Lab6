@@ -12,6 +12,7 @@
             <th>№</th>
             <th>Заголовок</th>
             <th>Категорія</th>
+            <th>Міток</th>
             <th>Дата</th>
             <th>Дії</th>
         </tr>
@@ -22,6 +23,7 @@
                 <td>{{ $blogs->firstItem() + $i }}</td>
                 <td><a href="{{ route('blog.show', $blog) }}">{{ $blog->t_title }}</a></td>
                 <td>{{ $blog->category?->category_name ?? '—' }}</td>
+                <td>{{ $blog->filters_count }}</td>
                 <td>{{ $blog->dt_created->format('d.m.Y') }}</td>
                 <td class="d-flex gap-2">
                     <a href="{{ route('blog.edit', $blog) }}">Редагувати</a>
@@ -34,7 +36,7 @@
                 </td>
             </tr>
         @empty
-            <tr><td colspan="5">Записів немає.</td></tr>
+            <tr><td colspan="6">Записів немає.</td></tr>
         @endforelse
         </tbody>
     </table>

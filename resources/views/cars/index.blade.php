@@ -38,6 +38,7 @@
                 <th>Пробіг, км</th>
                 <th>Паливо</th>
                 <th>КПП</th>
+                <th>Опцій</th>
                 <th>Дії</th>
             </tr>
             </thead>
@@ -62,13 +63,14 @@
                     <td>{{ number_format($car->mileage, 0, '.', ' ') }}</td>
                     <td>{{ $car->fuel_type->value }}</td>
                     <td>{{ $car->transmission->value }}</td>
+                    <td>{{ $car->features_count }}</td>
                     <td>
                         <a href="{{ route('cars.edit', $car) }}" class="btn btn-sm btn-outline-primary">Редагувати</a>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="10" class="text-center text-muted">Автомобілі не знайдено.</td>
+                    <td colspan="11" class="text-center text-muted">Автомобілі не знайдено.</td>
                 </tr>
             @endforelse
             </tbody>

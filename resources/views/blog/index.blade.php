@@ -28,7 +28,23 @@
     </style>
 
     <h1>Блог</h1>
-    <p><a href="{{ route('blog.admin') }}">Адміністрування</a></p>
+    <p>
+        <a href="{{ route('blog.admin') }}">Адміністрування</a> ·
+        <a href="{{ route('filters.index') }}">Довідник міток</a>
+    </p>
+
+    <nav class="blog-filters d-flex flex-wrap gap-2 my-3">
+        <a href="{{ route('blog.index') }}"
+           class="btn btn-sm {{ $filterId ? 'btn-outline-secondary' : 'btn-secondary' }}">
+            Усі записи
+        </a>
+        @foreach ($filters as $id => $name)
+            <a href="{{ route('blog.index', ['filter' => $id]) }}"
+               class="btn btn-sm {{ (int) $filterId === $id ? 'btn-secondary' : 'btn-outline-secondary' }}">
+                {{ $name }}
+            </a>
+        @endforeach
+    </nav>
 
     <div class="blog-grid">
         @forelse ($blogs as $blog)

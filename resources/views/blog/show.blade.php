@@ -19,8 +19,17 @@
     <p class="lead">{{ $blog->t_description }}</p>
     <div style="white-space: pre-line">{{ $blog->t_text }}</div>
 
+    <div class="tags d-flex flex-wrap gap-2 my-3">
+        @forelse ($blog->filters as $filter)
+            <span class="badge bg-secondary">{{ $filter->filter_name }}</span>
+        @empty
+            <span class="text-muted">Міток немає.</span>
+        @endforelse
+    </div>
+
     <p class="mt-4">
         <a href="{{ route('blog.index') }}">← До переліку</a> ·
-        <a href="{{ route('blog.edit', $blog) }}">Редагувати</a>
+        <a href="{{ route('blog.edit', $blog) }}">Редагувати</a> ·
+        <a href="{{ route('blog.tags', $blog) }}">Мітки (DualListBox)</a>
     </p>
 @endsection

@@ -66,3 +66,17 @@
            value="{{ old('color', $car->color ?? '') }}">
     @error('color') <p class="text-danger small mb-0">{{ $message }}</p> @enderror
 </div>
+
+<div class="mb-3">
+    <label for="features" class="form-label">Опції (кілька значень)</label>
+    <select id="features" name="features[]" multiple>
+        @foreach ($features as $id => $name)
+            <option value="{{ $id }}"
+                @selected(in_array($id, old('features', $selected ?? [])))>
+                {{ $name }}
+            </option>
+        @endforeach
+    </select>
+    @error('features') <p class="text-danger small mb-0">{{ $message }}</p> @enderror
+    @error('features.*') <p class="text-danger small mb-0">{{ $message }}</p> @enderror
+</div>
